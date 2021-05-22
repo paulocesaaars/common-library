@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3A3DE23E-08F0-46D7-8071-725CF4B52C36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deviot.CommonLibrary", "src\Deviot.CommonLibrary.Common\Deviot.CommonLibrary.csproj", "{BEFBB292-E2CA-4E6B-8A73-F3D071CF7174}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BEFBB292-E2CA-4E6B-8A73-F3D071CF7174}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEFBB292-E2CA-4E6B-8A73-F3D071CF7174}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEFBB292-E2CA-4E6B-8A73-F3D071CF7174}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEFBB292-E2CA-4E6B-8A73-F3D071CF7174}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BEFBB292-E2CA-4E6B-8A73-F3D071CF7174} = {3A3DE23E-08F0-46D7-8071-725CF4B52C36}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D4B88B3D-9908-4947-86B9-F0630C1D7256}
+	EndGlobalSection
+EndGlobal
