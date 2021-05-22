@@ -9,6 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Common", "src\Deviot
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Common.EntityPostgres", "src\Deviot.Common.EntityPostgres\Deviot.Common.EntityPostgres.csproj", "{8A828F0E-8063-4C96-ABC2-ABA3798FFDDF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E65B3A69-21C2-4DE4-8CD6-97B9901406D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deviot.CommonTests", "tests\Deviot.CommonTests\Deviot.CommonTests.csproj", "{A939C995-470D-40DF-A02B-D7079CA01DDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deviot.Common.EntityPostgresTests", "tests\Deviot.Common.EntityPostgresTests\Deviot.Common.EntityPostgresTests.csproj", "{041550EF-3A41-49EA-A363-6965519E72BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +29,14 @@ Global
 		{8A828F0E-8063-4C96-ABC2-ABA3798FFDDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A828F0E-8063-4C96-ABC2-ABA3798FFDDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A828F0E-8063-4C96-ABC2-ABA3798FFDDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A939C995-470D-40DF-A02B-D7079CA01DDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A939C995-470D-40DF-A02B-D7079CA01DDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A939C995-470D-40DF-A02B-D7079CA01DDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A939C995-470D-40DF-A02B-D7079CA01DDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{041550EF-3A41-49EA-A363-6965519E72BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{041550EF-3A41-49EA-A363-6965519E72BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{041550EF-3A41-49EA-A363-6965519E72BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{041550EF-3A41-49EA-A363-6965519E72BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +44,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B75F96FB-AED3-426C-84A3-ADB9A525DAA8} = {3A3DE23E-08F0-46D7-8071-725CF4B52C36}
 		{8A828F0E-8063-4C96-ABC2-ABA3798FFDDF} = {3A3DE23E-08F0-46D7-8071-725CF4B52C36}
+		{A939C995-470D-40DF-A02B-D7079CA01DDB} = {E65B3A69-21C2-4DE4-8CD6-97B9901406D6}
+		{041550EF-3A41-49EA-A363-6965519E72BD} = {E65B3A69-21C2-4DE4-8CD6-97B9901406D6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D4B88B3D-9908-4947-86B9-F0630C1D7256}

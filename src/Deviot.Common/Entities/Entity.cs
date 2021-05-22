@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Deviot.Common.Entities
 {
+    [ExcludeFromCodeCoverage]
     public class Entity
     {
         public Guid Id { get; protected set; }
