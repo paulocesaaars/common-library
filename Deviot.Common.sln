@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3A3DE23E-08F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Common", "src\Deviot.Common\Deviot.Common.csproj", "{B75F96FB-AED3-426C-84A3-ADB9A525DAA8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Common.EntityPostgres", "src\Deviot.Common.Repository\Deviot.Common.EntityPostgres.csproj", "{B0EB5462-6EE4-402B-9689-1ABB0B787293}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Deviot.Common.EntityPostgres", "src\Deviot.Common.EntityPostgres\Deviot.Common.EntityPostgres.csproj", "{8A828F0E-8063-4C96-ABC2-ABA3798FFDDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,17 +19,17 @@ Global
 		{B75F96FB-AED3-426C-84A3-ADB9A525DAA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B75F96FB-AED3-426C-84A3-ADB9A525DAA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B75F96FB-AED3-426C-84A3-ADB9A525DAA8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B0EB5462-6EE4-402B-9689-1ABB0B787293}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B0EB5462-6EE4-402B-9689-1ABB0B787293}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B0EB5462-6EE4-402B-9689-1ABB0B787293}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B0EB5462-6EE4-402B-9689-1ABB0B787293}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A828F0E-8063-4C96-ABC2-ABA3798FFDDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A828F0E-8063-4C96-ABC2-ABA3798FFDDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A828F0E-8063-4C96-ABC2-ABA3798FFDDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A828F0E-8063-4C96-ABC2-ABA3798FFDDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B75F96FB-AED3-426C-84A3-ADB9A525DAA8} = {3A3DE23E-08F0-46D7-8071-725CF4B52C36}
-		{B0EB5462-6EE4-402B-9689-1ABB0B787293} = {3A3DE23E-08F0-46D7-8071-725CF4B52C36}
+		{8A828F0E-8063-4C96-ABC2-ABA3798FFDDF} = {3A3DE23E-08F0-46D7-8071-725CF4B52C36}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D4B88B3D-9908-4947-86B9-F0630C1D7256}

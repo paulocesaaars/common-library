@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Deviot.Common.Repository
+namespace Deviot.Common.Deviot.Common.EntityPostgres
 {
     public abstract class Repository : IRepository
     {

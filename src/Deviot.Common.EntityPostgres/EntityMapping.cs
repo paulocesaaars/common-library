@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Deviot.Common.Repository
+namespace Deviot.Common.Deviot.Common.EntityPostgres
 {
     public abstract class EntityMapping
     {
