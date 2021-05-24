@@ -36,7 +36,7 @@ namespace Deviot.Common.Enumerators
                 var otherValue = obj as Enumeration;
 
                 if (otherValue == null)
-                    return false;
+                    throw new InvalidOperationException();
 
                 var typeMatches = GetType().Equals(obj.GetType());
                 var valueMatches = Name.Equals(otherValue.Name);

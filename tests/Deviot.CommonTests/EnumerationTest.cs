@@ -32,6 +32,12 @@ namespace Deviot.CommonTests
         }
 
         [Fact]
+        public void Equals_VerificaMetodoEqualsComObjetoNulo_DeveRetornarFalse()
+        {
+            Assert.False(TestEnumeration.Teste1.Equals(null));
+        }
+
+        [Fact]
         public void CompareTo_VerificaMetodoCompareTo_DeveRetornarZero()
         {
             var result = TestEnumeration.Teste1.CompareTo(TestEnumeration.Teste1);

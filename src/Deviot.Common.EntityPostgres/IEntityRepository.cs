@@ -5,9 +5,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Deviot.Common.Deviot.Common.EntityPostgres
+namespace Deviot.Common.EntityPostgres
 {
-    public interface IRepository : IDisposable
+    public interface IEntityRepository : IDisposable
     {
         bool IsTransaction { get; }
 

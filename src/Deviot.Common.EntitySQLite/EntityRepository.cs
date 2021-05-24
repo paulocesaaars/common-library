@@ -6,9 +6,9 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Deviot.Common.Deviot.Common.EntityPostgres
+namespace Deviot.Common.Deviot.Common.EntitySQLite
 {
-    public abstract class Repository : IRepository
+    public abstract class EntityRepository : IEntityRepository
     {
         #region Attributes
         private readonly DbContext _db;
@@ -23,7 +23,7 @@ namespace Deviot.Common.Deviot.Common.EntityPostgres
         #endregion
 
         #region Constructors
-        protected Repository(DbContext db)
+        protected EntityRepository(DbContext db)
         {
             _db = db;
         }
