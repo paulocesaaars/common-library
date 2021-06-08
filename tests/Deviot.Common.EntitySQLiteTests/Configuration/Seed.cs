@@ -2,9 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
-namespace Deviot.Common.EntitySQLiteTests.Context
+namespace Deviot.Common.EntitySQLiteTests.Configuration
 {
+    [ExcludeFromCodeCoverage]
     public static class Seed
     {
         public static void Create(ModelBuilder modelBuilder)

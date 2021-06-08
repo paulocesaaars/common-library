@@ -1,5 +1,4 @@
-﻿using Deviot.Common.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,18 +31,6 @@ namespace Deviot.Common.Deviot.Common.EntitySQLite
         #region Methods
 
         #region Private
-        private static IQueryable<T> MakeIncludes<T>(IQueryable<T> query, string[] includes) where T : Entity
-        {
-            if (includes != null)
-            {
-                foreach (string include in includes)
-                {
-                    query = query.Include(include).AsQueryable();
-                }
-            }
-
-            return query;
-        }
         #endregion
 
         #region Public
@@ -59,13 +46,10 @@ namespace Deviot.Common.Deviot.Common.EntitySQLite
             }
         }
 
-        public IQueryable<T> Get<T>(bool noTracking = false) where T : Entity
+        public IQueryable<T> Get<T>() where T : Entity
         {
             try
             {
-                if (noTracking)
-                    return _db.Set<T>().AsNoTracking();
-                else
                     return _db.Set<T>();
             }
             catch (Exception exception)
@@ -74,58 +58,11 @@ namespace Deviot.Common.Deviot.Common.EntitySQLite
             }
         }
 
-        public IQueryable<T> Get<T>(Expression<Func<T, bool>> expression, bool noTracking = false) where T : Entity
+        public IQueryable<T> Get<T>(Expression<Func<T, bool>> expression) where T : Entity
         {
             try
             {
-                if (noTracking)
-                    return _db.Set<T>().Where(expression).AsNoTracking();
-                else
                     return _db.Set<T>().Where(expression);
-            }
-            catch (Exception exception)
-            {
-                throw new Exception(GENERIC_ERROR, exception);
-            }
-            
-        }
-
-        public IQueryable<T> Get<T>(int take, int skip, params string[] includes) where T : Entity
-        {
-            try
-            {
-                var query = _db.Set<T>().AsQueryable();
-
-                if (includes != null)
-                    foreach (string include in includes)
-                        query = query.Include(include).AsQueryable();
-
-                return query.Skip(skip).Take(take);
-            }
-            catch (Exception exception)
-            {
-                throw new Exception(GENERIC_ERROR, exception);
-            }
-            
-        }
-
-        public IQueryable<T> Get<T>(Expression<Func<T, bool>> expression, bool noTracking = false, params string[] includes) where T : Entity
-        {
-            try
-            {
-                if (noTracking)
-                {
-                    var query = _db.Set<T>().AsNoTracking().AsQueryable();
-                    query = MakeIncludes<T>(query, includes);
-                    return query.Where(expression);
-                }
-                else
-                {
-                    var query = _db.Set<T>().AsQueryable();
-                    query = MakeIncludes<T>(query, includes);
-                    return query.Where(expression);
-
-                }
             }
             catch (Exception exception)
             {

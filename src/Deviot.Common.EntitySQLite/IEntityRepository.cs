@@ -1,4 +1,4 @@
-﻿using Deviot.Common.Entities;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +9,11 @@ namespace Deviot.Common.Deviot.Common.EntitySQLite
 {
     public interface IEntityRepository : IDisposable
     {
-        bool IsTransaction { get; }
-
         Task<TEntity> GetAsync<TEntity>(Guid id) where TEntity : Entity;
 
-        IQueryable<TEntity> Get<TEntity>(bool noTracking = true) where TEntity : Entity;
+        IQueryable<TEntity> Get<TEntity>() where TEntity : Entity;
 
-        IQueryable<TEntity> Get<TEntity>(Expression<Func<TEntity, bool>> expression, bool noTracking = true) where TEntity : Entity;
-
-        IQueryable<TEntity> Get<TEntity>(Expression<Func<TEntity, bool>> expression, bool noTracking = true, params string[] includes) where TEntity : Entity;
-
-        IQueryable<TEntity> Get<TEntity>(int take, int skip, params string[] includes) where TEntity : Entity;
+        IQueryable<TEntity> Get<TEntity>(Expression<Func<TEntity, bool>> expression) where TEntity : Entity;
 
         Task AddAsync<TEntity>(TEntity entity) where TEntity : Entity;
 

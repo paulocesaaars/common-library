@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Deviot.Common.Enumerators
+namespace Deviot.Common
 {
     public abstract class Enumeration : IComparable
     {
@@ -50,5 +50,10 @@ namespace Deviot.Common.Enumerators
         }
 
         public int CompareTo(object other) => Name.CompareTo(((Enumeration)other).Name);
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Id, Name);
+        }
     }
 }

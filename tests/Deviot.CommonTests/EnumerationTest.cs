@@ -1,4 +1,3 @@
-using Deviot.Common.Enumerators;
 using Deviot.CommonTests.Enumerators;
 using System.Linq;
 using Xunit;
@@ -8,47 +7,56 @@ namespace Deviot.CommonTests
     public class EnumerationTest
     {
         [Fact]
-        public void ToString_VerificaMetodoToString_DeveSerIgualPropriedadeName()
+        public void VerificaMetodoToString_DeveSerIgualPropriedadeName()
         {
-            Assert.Equal(TestEnumeration.Teste1.ToString(), TestEnumeration.Teste1.Name);
+            Assert.Equal(TesteEnumeration.Teste1.ToString(), TesteEnumeration.Teste1.Name);
         }
 
         [Fact]
-        public void GetAll_VerificaMetodoGetAll_DeveSerRetornarMaisDeUm()
+        public void VerificaMetodoGetAll_DeveSerRetornarMaisDeUm()
         {
-            Assert.True(Enumeration.GetAll<TestEnumeration>().Count() > 1);
+            Assert.True(TesteEnumeration.GetAll<TesteEnumeration>().Count() > 1);
         }
 
         [Fact]
-        public void Equals_VerificaMetodoEquals_DeveRetornarTrue()
+        public void VerificaMetodoEquals_DeveRetornarTrue()
         {
-            Assert.True(TestEnumeration.Teste1.Equals(TestEnumeration.Teste1));
+            Assert.True(TesteEnumeration.Teste1.Equals(TesteEnumeration.Teste1));
         }
 
         [Fact]
-        public void Equals_VerificaMetodoEquals_DeveRetornarFalse()
+        public void VerificaMetodoEquals_DeveRetornarFalse()
         {
-            Assert.False(TestEnumeration.Teste1.Equals(TestEnumeration.Teste2));
+            Assert.False(TesteEnumeration.Teste1.Equals(TesteEnumeration.Teste2));
         }
 
         [Fact]
-        public void Equals_VerificaMetodoEqualsComObjetoNulo_DeveRetornarFalse()
+        public void VerificaMetodoEqualsComObjetoNulo_DeveRetornarFalse()
         {
-            Assert.False(TestEnumeration.Teste1.Equals(null));
+            Assert.False(TesteEnumeration.Teste1.Equals(null));
         }
 
         [Fact]
-        public void CompareTo_VerificaMetodoCompareTo_DeveRetornarZero()
+        public void VerificaMetodoCompareTo_DeveRetornarZero()
         {
-            var result = TestEnumeration.Teste1.CompareTo(TestEnumeration.Teste1);
+            var result = TesteEnumeration.Teste1.CompareTo(TesteEnumeration.Teste1);
             Assert.True(result == 0);
         }
 
         [Fact]
-        public void CompareTo_VerificaMetodoCompareTo_DeveRetornarMenorQueZero()
+        public void VerificaMetodoCompareTo_DeveRetornarMenorQueZero()
         {
-            var result = TestEnumeration.Teste1.CompareTo(TestEnumeration.Teste2);
+            var result = TesteEnumeration.Teste1.CompareTo(TesteEnumeration.Teste2);
             Assert.True(result < 0);
+        }
+
+        [Fact]
+        public void ComparaHashCodeDeDoisObjetosDiferente_DeveRetornarFalso()
+        {
+            var hash1 = TesteEnumeration.Teste1.GetHashCode();
+            var hash2 = TesteEnumeration.Teste2.GetHashCode();
+
+            Assert.False(hash1 == hash2);
         }
     }
 }

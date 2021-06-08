@@ -1,8 +1,11 @@
 ﻿using Deviot.Common.EntitySQLiteTests.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
-namespace Deviot.Common.EntitySQLiteTests.Context
+namespace Deviot.Common.EntitySQLiteTests.Configuration
 {
+    [ExcludeFromCodeCoverage]
     public class ApplicationDbContext : DbContext
     {
         public DbSet<User> User { get; set; }
@@ -15,7 +18,12 @@ namespace Deviot.Common.EntitySQLiteTests.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+                relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
+
             base.OnModelCreating(modelBuilder);
+
             Seed.Create(modelBuilder);
         }
     }
