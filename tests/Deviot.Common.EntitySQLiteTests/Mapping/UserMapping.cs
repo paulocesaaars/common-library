@@ -2,6 +2,7 @@
 using Deviot.Common.EntitySQLiteTests.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Deviot.Common.EntitySQLiteTests.Mapping

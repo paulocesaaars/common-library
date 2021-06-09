@@ -1,21 +1,19 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Deviot.Common
 {
-    public class Entity<T>
+    [ExcludeFromCodeCoverage]
+    public class Entity
     {
-        public T Id { get; protected set; }
+        public Guid Id { get; protected set; }
 
         public Entity()
         {
-            var type = this.GetType();
-            var property = type.GetProperty($"Id");
-
-            if(property.PropertyType == typeof(Guid))
-                property.SetValue(this, Guid.NewGuid());
+            Id = Guid.NewGuid();
         }
 
-        public Entity(T id)
+        public Entity(Guid id)
         {
             Id = id;
         }

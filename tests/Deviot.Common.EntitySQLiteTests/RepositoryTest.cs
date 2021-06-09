@@ -26,7 +26,7 @@ namespace Deviot.Common.EntitySQLiteTests
 
         private static ApplicationDbContext CreateContext()
         {
-            var connection = new SqliteConnection("Data Source=Contatos.db");
+            var connection = new SqliteConnection("Data Source=:memory:");
             connection.Open();
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                                 .UseSqlite(connection)
@@ -38,9 +38,9 @@ namespace Deviot.Common.EntitySQLiteTests
         private static User GetUserPaulo() => new User(new Guid("7011423f65144a2fb1d798dec19cf466"), "Paulo César de Souza");
 
         [Fact]
-        public async Task GetAsync_DeveRetornarUsuarioPaulo()
+        public async Task Get_DeveRetornarUsuarioPaulo()
         {
-            var user = await _repository.GetAsync<User>(new Guid("7011423f65144a2fb1d798dec19cf466"));
+            var user = await _repository.Get<User>().FirstOrDefaultAsync(u => u.Id == new Guid("7011423f65144a2fb1d798dec19cf466"));
             user.Should().BeEquivalentTo(GetUserPaulo());
         }
 
@@ -52,10 +52,47 @@ namespace Deviot.Common.EntitySQLiteTests
         }
 
         [Fact]
-        public async Task Get_DeveRetornarUsuarioPaulo()
+        public async Task Add_DeveRetornarUsuarioNovo()
         {
-            var user = await _repository.Get<User>(u => u.Id == new Guid("7011423f65144a2fb1d798dec19cf466")).FirstOrDefaultAsync();
-            user.Should().BeEquivalentTo(GetUserPaulo());
+            var id = new Guid("820304523b5d4434a3fce441a2ba7b18");
+            var user = new User(id, "Novo usuário");
+
+            await _repository.AddAsync<User>(user);
+
+            var newUser = await _repository.Get<User>().FirstOrDefaultAsync(u => u.Id == id);
+
+            user.Should().BeEquivalentTo(newUser);
+        }
+
+        [Fact]
+        public async Task Edit_DeveRetornarUsuarioNovo()
+        {
+            var id = new Guid("09c3b09002af403ca5c69aaaf5463918");
+            var user = new User(id, "Novo usuário");
+
+            await _repository.AddAsync<User>(user);
+
+            user.SetName("Usuário editado");
+            await _repository.EditAsync(user);
+
+            var newUser = await _repository.Get<User>().FirstOrDefaultAsync(u => u.Id == id);
+
+            user.Should().BeEquivalentTo(newUser);
+        }
+
+        [Fact]
+        public async Task Delete_DeveRetornarUsuarioNovo()
+        {
+            var id = new Guid("09c3b09002af403ca5c69aaaf5463918");
+            var user = new User(id, "Novo usuário");
+
+            await _repository.AddAsync<User>(user);
+            var count = await _repository.Get<User>().CountAsync();
+
+            await _repository.DeleteAsync(user);
+            var newCount = await _repository.Get<User>().CountAsync();
+
+            count.Should().BeGreaterThan(newCount);
         }
     }
 }

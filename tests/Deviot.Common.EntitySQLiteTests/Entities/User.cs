@@ -13,5 +13,7 @@ namespace Deviot.Common.EntitySQLiteTests.Entities
             Id = id;
             Name = name;
         }
+
+        public void SetName(string value) => Name = value;
     }
 }
