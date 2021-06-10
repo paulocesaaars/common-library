@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Description>Pacote base para todos os projetos desenvolvidos pela empresa Deviot</Description>
+    <RepositoryUrl>https://github.com/paulocesaaars/common-library</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <Company>Deviot</Company>
+    <Product>Common library</Product>
+    <Authors>Paulo César de Souza</Authors>
+    <NeutralLanguage>en</NeutralLanguage>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/paulocesaaars/common-library</PackageProjectUrl>
   </PropertyGroup>
 
 </Project>
