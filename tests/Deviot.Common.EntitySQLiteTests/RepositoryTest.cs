@@ -37,21 +37,21 @@ namespace Deviot.Common.EntitySQLiteTests
 
         private static User GetUserPaulo() => new User(new Guid("7011423f65144a2fb1d798dec19cf466"), "Paulo César de Souza");
 
-        [Fact]
+        [Fact(DisplayName = "Busca primeiro item")]
         public async Task Get_DeveRetornarUsuarioPaulo()
         {
             var user = await _repository.Get<User>().FirstOrDefaultAsync(u => u.Id == new Guid("7011423f65144a2fb1d798dec19cf466"));
             user.Should().BeEquivalentTo(GetUserPaulo());
         }
 
-        [Fact]
+        [Fact(DisplayName = "Busca uma lista")]
         public async Task Get_DeveRetornarUmaLista()
         {
             var users = await _repository.Get<User>().ToListAsync();
             users.Should().HaveCountGreaterOrEqualTo(2);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Adicionar")]
         public async Task Add_DeveRetornarUsuarioNovo()
         {
             var id = new Guid("820304523b5d4434a3fce441a2ba7b18");
@@ -64,7 +64,7 @@ namespace Deviot.Common.EntitySQLiteTests
             user.Should().BeEquivalentTo(newUser);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Editar")]
         public async Task Edit_DeveRetornarUsuarioNovo()
         {
             var id = new Guid("09c3b09002af403ca5c69aaaf5463918");
@@ -80,7 +80,7 @@ namespace Deviot.Common.EntitySQLiteTests
             user.Should().BeEquivalentTo(newUser);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Deletar")]
         public async Task Delete_DeveRetornarUsuarioNovo()
         {
             var id = new Guid("09c3b09002af403ca5c69aaaf5463918");
