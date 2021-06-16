@@ -73,6 +73,26 @@ namespace Deviot.CommonTests
             Assert.True(Utils.ValidateAlphanumeric(value));
         }
 
+        [Theory(DisplayName = "Checar alfanúmerico com underline inválido")]
+        [InlineData("")]
+        [InlineData(null)]
+        [InlineData("*")]
+        [InlineData("%")]
+        [InlineData(".")]
+        public void ValidateAlphanumericWithUnderline_DeveRetornarFalse(string value)
+        {
+            Assert.False(Utils.ValidateAlphanumericWithUnderline(value));
+        }
+
+        [Theory(DisplayName = "Checar alfanúmerico com underline válido")]
+        [InlineData("0123456789_")]
+        [InlineData("abcdefghijklmnopqrstuvwxyz")]
+        [InlineData("ABCDEFGHIJKLMNOPQRSTUVWXYZ")]
+        public void ValidateAlphanumericWithUnderline_DeveRetornarTrue(string value)
+        {
+            Assert.True(Utils.ValidateAlphanumericWithUnderline(value));
+        }
+
         [Theory(DisplayName = "Checar numeros inválido")]
         [InlineData("")]
         [InlineData(null)]
