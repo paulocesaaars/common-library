@@ -1,14 +1,16 @@
 using Deviot.Common;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Xunit;
 
 namespace Deviot.CommonTests
 {
+    [ExcludeFromCodeCoverage]
     public class UtilsTest
     {
 
-        [Theory(DisplayName = "Checar email inválido")]
+        [Theory(DisplayName = "Valida email - inválido")]
         [InlineData("")]
         [InlineData(null)]
         [InlineData("teste")]
@@ -19,7 +21,7 @@ namespace Deviot.CommonTests
             Assert.False(Utils.ValidateEmail(email));
         }
 
-        [Theory(DisplayName = "Checar email válido")]
+        [Theory(DisplayName = "Valida email - válido")]
         [InlineData("teste@teste.com")]
         [InlineData("teste@teste.com.br")]
         public void ValidateEmail_DeveRetornarTrue(string email)
@@ -27,7 +29,7 @@ namespace Deviot.CommonTests
             Assert.True(Utils.ValidateEmail(email));
         }
 
-        [Theory(DisplayName = "Checar hexadecimal inválido")]
+        [Theory(DisplayName = "Valida hexadecimal - inválido")]
         [InlineData("")]
         [InlineData(null)]
         [InlineData("*")]
@@ -43,7 +45,7 @@ namespace Deviot.CommonTests
             Assert.False(Utils.ValidateHexadecimal(value));
         }
 
-        [Theory(DisplayName = "Checar hexadecimal válido")]
+        [Theory(DisplayName = "Valida hexadecimal - válido")]
         [InlineData("0123456789")]
         [InlineData("abcdef")]
         [InlineData("ABCDEF")]
@@ -52,7 +54,7 @@ namespace Deviot.CommonTests
             Assert.True(Utils.ValidateHexadecimal(value));
         }
 
-        [Theory(DisplayName = "Checar alfanúmerico inválido")]
+        [Theory(DisplayName = "Valida alfanúmerico - inválido")]
         [InlineData("")]
         [InlineData(null)]
         [InlineData("*")]
@@ -64,7 +66,7 @@ namespace Deviot.CommonTests
             Assert.False(Utils.ValidateAlphanumeric(value));
         }
 
-        [Theory(DisplayName = "Checar alfanúmerico válido")]
+        [Theory(DisplayName = "Valida alfanúmerico - válido")]
         [InlineData("0123456789")]
         [InlineData("abcdefghijklmnopqrstuvwxyz")]
         [InlineData("ABCDEFGHIJKLMNOPQRSTUVWXYZ")]
@@ -73,7 +75,7 @@ namespace Deviot.CommonTests
             Assert.True(Utils.ValidateAlphanumeric(value));
         }
 
-        [Theory(DisplayName = "Checar alfanúmerico com underline inválido")]
+        [Theory(DisplayName = "Valida alfanúmerico com underline - inválido")]
         [InlineData("")]
         [InlineData(null)]
         [InlineData("*")]
@@ -84,7 +86,7 @@ namespace Deviot.CommonTests
             Assert.False(Utils.ValidateAlphanumericWithUnderline(value));
         }
 
-        [Theory(DisplayName = "Checar alfanúmerico com underline válido")]
+        [Theory(DisplayName = "Valida alfanúmerico com underline - válido")]
         [InlineData("0123456789_")]
         [InlineData("abcdefghijklmnopqrstuvwxyz")]
         [InlineData("ABCDEFGHIJKLMNOPQRSTUVWXYZ")]
@@ -93,7 +95,7 @@ namespace Deviot.CommonTests
             Assert.True(Utils.ValidateAlphanumericWithUnderline(value));
         }
 
-        [Theory(DisplayName = "Checar numeros inválido")]
+        [Theory(DisplayName = "Valida numeros - inválido")]
         [InlineData("")]
         [InlineData(null)]
         [InlineData("*")]
@@ -109,7 +111,7 @@ namespace Deviot.CommonTests
             Assert.False(Utils.ValidateNumeric(value));
         }
 
-        [Theory(DisplayName = "Checar numeros válido")]
+        [Theory(DisplayName = "Valida numeros - válido")]
         [InlineData("0123456789")]
         [InlineData("123")]
         public void ValidateNumeric_DeveRetornarTrue(string value)
@@ -117,7 +119,7 @@ namespace Deviot.CommonTests
             Assert.True(Utils.ValidateNumeric(value));
         }
 
-        [Fact(DisplayName = "Converter lista em exceptions")]
+        [Fact(DisplayName = "Converte lista em exceptions")]
         public void ConvertException_DeveRetornarException()
         {
             var list = new List<string>(3);

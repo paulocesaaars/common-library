@@ -1,9 +1,11 @@
-using Deviot.CommonTests.Enumerators;
+using Deviot.Common;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Xunit;
 
 namespace Deviot.CommonTests
 {
+    [ExcludeFromCodeCoverage]
     public class EnumerationTest
     {
         [Fact(DisplayName = "Retorna o nome de um tipo")]
@@ -57,6 +59,18 @@ namespace Deviot.CommonTests
             var hash2 = TesteEnumeration.Teste2.GetHashCode();
 
             Assert.False(hash1 == hash2);
+        }
+    }
+
+    internal class TesteEnumeration : Enumeration
+    {
+        public static TesteEnumeration Teste1 = new TesteEnumeration(1, "Teste 1");
+
+        public static TesteEnumeration Teste2 = new TesteEnumeration(2, "Teste 2");
+
+        public TesteEnumeration(int id, string name) : base(id, name)
+        {
+
         }
     }
 }
