@@ -1,21 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 
 namespace Deviot.Common
 {
     public interface INotifier
     {
-        bool HasNotifications(NotificationTypeEnum? filter = null);
+        bool HasNotifications { get; }
 
-        bool HasErrorsNotifications();
+        IEnumerable<Notify> GetNotifications();
 
-        IEnumerable<Notify> GetNotifications(NotificationTypeEnum? filter = null);
-
-        void NotifySuccess(string message);
-
-        void NotifyValidationError(string message);
-
-        void NotifyInternalError(string message);
-
-        void NotifyExternalError(string message);
+        void Notify(HttpStatusCode httpStatusCode, string message);
     }
 }
