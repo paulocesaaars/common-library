@@ -13,7 +13,7 @@ namespace Deviot.CommonTests
 
         public NotifierTest()
         {
-            _notifier = new Notifier(null);
+            _notifier = new Notifier();
             _notifier.Notify(HttpStatusCode.OK, "teste");
         }
 
