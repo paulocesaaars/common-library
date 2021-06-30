@@ -10,5 +10,7 @@ namespace Deviot.Common
         IEnumerable<Notify> GetNotifications();
 
         void Notify(HttpStatusCode httpStatusCode, string message);
+
+        void Clear();
     }
 }

@@ -160,5 +160,13 @@ namespace Deviot.CommonTests
 
             Assert.True(password != result);
         }
+
+        [Fact(DisplayName = "Retornar todas mensagens de uma exception")]
+        public void GenerateRandomString_DeveRetornaLetrasAleatorias()
+        {
+            var result = Utils.GenerateRandomString(10);
+
+            Assert.True(result.Length == 10);
+        }
     }
 }

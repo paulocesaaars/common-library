@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
@@ -7,32 +6,18 @@ namespace Deviot.Common
 {
     public sealed class Notifier : INotifier
     {
-        private List<Notify> _notifies;
-
-        private ILogger _logger;
-
-        private const string ERROR_MESSAGE = "Ultrapassou o limite de notificações";
+        private readonly List<Notify> _notifies;
 
         public bool HasNotifications => _notifies.Any();
 
-        public Notifier(ILogger<Notifier> logger)
+        public Notifier()
         {
-            _notifies = new List<Notify>(10);
-            _logger = logger;
+            _notifies = new List<Notify>();
         }
 
         private void AddNotification(Notify notify)
         {
-            if (_logger is not null && _notifies.Count == 10)
-                _logger.LogError(ERROR_MESSAGE);
-            else
-                _notifies.Add(notify);
-        }
-
-        private void Logger(Notify notify)
-        {
-            if(_logger is not null)
-                _logger.LogInformation(notify.Message);
+            _notifies.Add(notify);
         }
 
         public IEnumerable<Notify> GetNotifications() => _notifies;
@@ -41,7 +26,8 @@ namespace Deviot.Common
         {
             var notify = new Notify(httpStatusCode, message);
             AddNotification(notify);
-            Logger(notify);
         }
+
+        public void Clear() => _notifies.Clear();
     }
 }
