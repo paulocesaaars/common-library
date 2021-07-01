@@ -2,6 +2,7 @@ using Deviot.Common;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Net.Http;
 using Xunit;
 
 namespace Deviot.CommonTests
@@ -9,6 +10,47 @@ namespace Deviot.CommonTests
     [ExcludeFromCodeCoverage]
     public class UtilsTest
     {
+        [Fact(DisplayName = "Cria um StringContent")]
+        public void CreateStringContent_DeveRetornarStringContent()
+        {
+            var result = Utils.CreateStringContent();
+
+            Assert.True(result.GetType() == typeof(StringContent));
+        }
+
+        [Fact(DisplayName = "Cria um StringContent com json")]
+        public void CreateStringContentWithJson_DeveRetornarStringContent()
+        {
+            var teste = new Teste { Name = "Paulo" };
+
+            var json = Utils.Serializer<Teste>(teste);
+            var result = Utils.CreateStringContent(json);
+
+            Assert.True(result.GetType() == typeof(StringContent));
+        }
+
+        [Fact(DisplayName = "Serializar objeto")]
+        public void Serializer_DeveRetornarJson()
+        {
+            var teste = new Teste { Name = "Paulo" };
+
+            var result = Utils.Serializer<Teste>(teste);
+
+            Assert.True(result.GetType() == typeof(string));
+        }
+
+        [Fact(DisplayName = "Deserializar json")]
+        public void Deserializer_DeveRetornarObjeto()
+        {
+            var teste = new Teste { Name = "Paulo" };
+
+            var json = Utils.Serializer<Teste>(teste);
+
+            var result = Utils.Deserializer<Teste>(json);
+
+            Assert.NotNull(result);
+            Assert.Equal(teste.Name, result.Name);
+        }
 
         [Theory(DisplayName = "Valida email - inválido")]
         [InlineData("")]
@@ -168,5 +210,10 @@ namespace Deviot.CommonTests
 
             Assert.True(result.Length == 10);
         }
+    }
+
+    internal class Teste
+    {
+        public string Name { get; set; }
     }
 }

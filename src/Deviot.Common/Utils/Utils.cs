@@ -1,14 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 namespace Deviot.Common
 {
     public static class Utils
     {
+        private const string MEDIA_TYPE = "application/json";
+
+        public static StringContent CreateStringContent(string json)
+        {
+            return new StringContent(json, Encoding.UTF8, MEDIA_TYPE);
+        }
+
+        public static StringContent CreateStringContent()
+        {
+            return new StringContent(string.Empty, Encoding.UTF8, MEDIA_TYPE);
+        }
+
+        public static T Deserializer<T>(string json)
+        {
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            return JsonSerializer.Deserialize<T>(json, options);
+        }
+
+        public static string Serializer<T>(T value)
+        {
+            return JsonSerializer.Serialize<T>(value);
+        }
+
         public static bool ValidateEmail(string email)
         {
             if (string.IsNullOrEmpty(email))
