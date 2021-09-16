@@ -5,9 +5,9 @@ using System.Reflection;
 
 namespace Deviot.Common
 {
-    public abstract class Enumeration : IComparable
+    public abstract class EnumerationGeneric<Y>
     {
-        public int Id { get; private set; }
+        public Y Id { get; private set; }
 
         public string Name { get; private set; }
 
@@ -15,18 +15,18 @@ namespace Deviot.Common
         private const string VALUE = "value";
         private const string DISPLAY_NAME = "display name";
 
-        protected Enumeration()
+        protected EnumerationGeneric()
         {
 
         }
 
-        protected Enumeration(int id, string name)
+        protected EnumerationGeneric(Y id, string name)
         {
             Id = id;
             Name = name;
         }
 
-        private static T Parse<T, K>(K value, string description, Func<T, bool> predicate) where T : Enumeration
+        private static T Parse<T, K>(K value, string description, Func<T, bool> predicate) where T : EnumerationGeneric<Y>, new()
         {
             var matchingItem = GetAll<T>().FirstOrDefault(predicate);
 
@@ -41,7 +41,7 @@ namespace Deviot.Common
 
         public override string ToString() => Name;
 
-        public static IEnumerable<T> GetAll<T>() where T : Enumeration
+        public static IEnumerable<T> GetAll<T>() where T : EnumerationGeneric<Y>
         {
             var fields = typeof(T).GetFields(BindingFlags.Public |
                                              BindingFlags.Static |
@@ -55,7 +55,7 @@ namespace Deviot.Common
         {
             try
             {
-                var otherValue = obj as Enumeration;
+                var otherValue = obj as EnumerationGeneric<Y>;
 
                 if (otherValue == null)
                     throw new InvalidOperationException();
@@ -71,38 +71,38 @@ namespace Deviot.Common
             }
         }
 
-        public int CompareTo(object other) => Name.CompareTo(((Enumeration)other).Name);
+        public int CompareTo(object other) => Name.CompareTo(((EnumerationGeneric<Y>)other).Name);
 
         public override int GetHashCode()
         {
             return HashCode.Combine(Id, Name);
         }
 
-        public static T FromId<T>(int id) where T : Enumeration, new()
+        public static T FromId<T>(Y id) where T : EnumerationGeneric<Y>, new()
         {
-            var matchingItem = Parse<T, int>(id, VALUE, item => item.Id.Equals(id));
+            var matchingItem = Parse<T, Y>(id, VALUE, item => item.Id.Equals(id));
             return matchingItem;
         }
 
-        public static T FromName<T>(string name) where T : Enumeration, new()
+        public static T FromName<T>(string name) where T : EnumerationGeneric<Y>, new()
         {
             var matchingItem = Parse<T, string>(name, DISPLAY_NAME, item => item.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
             return matchingItem;
         }
 
-        public static T FromIdOrDefault<T>(int id, T enumerationDefault) where T : Enumeration, new()
+        public static T FromIdOrDefault<T>(Y id, T enumerationDefault) where T : EnumerationGeneric<Y>, new()
         {
             try
             {
                 return FromId<T>(id);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return enumerationDefault;
             }
         }
 
-        public static T FromNameOrDefault<T>(string name, T enumerationDefault) where T : Enumeration, new()
+        public static T FromNameOrDefault<T>(string name, T enumerationDefault) where T : EnumerationGeneric<Y>, new()
         {
             try
             {
