@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -11,7 +12,30 @@ namespace Deviot.Common
 {
     public static class Utils
     {
+        private static readonly IDictionary<Type, IDictionary<string, PropertyInfo>> dictionaryType = new Dictionary<Type, IDictionary<string, PropertyInfo>>();
+
         private const string MEDIA_TYPE = "application/json";
+
+        private static IDictionary<string, PropertyInfo> GetTypeProperies<T>()
+        {
+            var type = typeof(T);
+            if(dictionaryType.ContainsKey(type))
+            {
+                return dictionaryType[type];
+            }
+
+            var properties = type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+            var dic = properties.ToDictionary(k => k.Name, v => v);
+            dictionaryType.Add(type, dic);
+            return dic;
+        }
+
+        public static void SetProperty<T>(this T target, string name, object value)
+        {
+            var prop = GetTypeProperies<T>()[name];
+            prop.SetValue(target, value);
+        }
 
         public static StringContent CreateStringContent(string json)
         {

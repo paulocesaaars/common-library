@@ -10,6 +10,16 @@ namespace Deviot.CommonTests
     [ExcludeFromCodeCoverage]
     public class UtilsTest
     {
+        [Fact(DisplayName = "Escrever em propriedades")]
+        public void SetProperty_DeveAtualizarPropriedade()
+        {
+            var dummy = new Dummy("Paulo");
+
+            dummy.SetProperty<Dummy>(nameof(dummy.Name), "Bruna");
+
+            Assert.True(dummy.Name == "Bruna");
+        }
+
         [Fact(DisplayName = "Cria um StringContent")]
         public void CreateStringContent_DeveRetornarStringContent()
         {
@@ -21,9 +31,9 @@ namespace Deviot.CommonTests
         [Fact(DisplayName = "Cria um StringContent com json")]
         public void CreateStringContentWithJson_DeveRetornarStringContent()
         {
-            var teste = new Teste { Name = "Paulo" };
+            var dummy = new Dummy("Paulo");
 
-            var json = Utils.Serializer<Teste>(teste);
+            var json = Utils.Serializer<Dummy>(dummy);
             var result = Utils.CreateStringContent(json);
 
             Assert.True(result.GetType() == typeof(StringContent));
@@ -32,9 +42,9 @@ namespace Deviot.CommonTests
         [Fact(DisplayName = "Serializar objeto")]
         public void Serializer_DeveRetornarJson()
         {
-            var teste = new Teste { Name = "Paulo" };
+            var dummy = new Dummy("Paulo");
 
-            var result = Utils.Serializer<Teste>(teste);
+            var result = Utils.Serializer<Dummy>(dummy);
 
             Assert.True(result.GetType() == typeof(string));
         }
@@ -42,14 +52,14 @@ namespace Deviot.CommonTests
         [Fact(DisplayName = "Deserializar json")]
         public void Deserializer_DeveRetornarObjeto()
         {
-            var teste = new Teste { Name = "Paulo" };
+            var dummy = new Dummy("Paulo");
 
-            var json = Utils.Serializer<Teste>(teste);
+            var json = Utils.Serializer<Dummy>(dummy);
 
-            var result = Utils.Deserializer<Teste>(json);
+            var result = Utils.Deserializer<Dummy>(json);
 
             Assert.NotNull(result);
-            Assert.Equal(teste.Name, result.Name);
+            Assert.Equal(dummy.Name, result.Name);
         }
 
         [Theory(DisplayName = "Valida email - inválido")]
@@ -212,8 +222,13 @@ namespace Deviot.CommonTests
         }
     }
 
-    internal class Teste
+    internal class Dummy
     {
-        public string Name { get; set; }
+        public string Name { get; private set; }
+
+        public Dummy(string name)
+        {
+            Name = name;
+        }
     }
 }
