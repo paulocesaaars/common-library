@@ -13,7 +13,6 @@ namespace Deviot.Common
     public static class Utils
     {
         private static readonly IDictionary<Type, IDictionary<string, PropertyInfo>> _dictionaryType = new Dictionary<Type, IDictionary<string, PropertyInfo>>();
-        private static readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
         private const string MEDIA_TYPE = "application/json";
         
@@ -51,12 +50,12 @@ namespace Deviot.Common
 
         public static T Deserializer<T>(string json)
         {
-            return JsonSerializer.Deserialize<T>(json, _jsonSerializerOptions);
+            return JsonSerializer.Deserialize<T>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
         public static string Serializer<T>(T value)
         {
-            return JsonSerializer.Serialize<T>(value, _jsonSerializerOptions);
+            return JsonSerializer.Serialize<T>(value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
         }
 
         public static bool ValidateEmail(string email)
