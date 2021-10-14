@@ -50,12 +50,12 @@ namespace Deviot.Common
 
         public static T Deserializer<T>(string json)
         {
-            return JsonSerializer.Deserialize<T>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            return JsonSerializer.Deserialize<T>(json, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
         }
 
         public static string Serializer<T>(T value)
         {
-            return JsonSerializer.Serialize<T>(value, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            return JsonSerializer.Serialize<T>(value, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
         }
 
         public static bool ValidateEmail(string email)
