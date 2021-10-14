@@ -12,22 +12,24 @@ namespace Deviot.Common
 {
     public static class Utils
     {
-        private static readonly IDictionary<Type, IDictionary<string, PropertyInfo>> dictionaryType = new Dictionary<Type, IDictionary<string, PropertyInfo>>();
+        private static readonly IDictionary<Type, IDictionary<string, PropertyInfo>> _dictionaryType = new Dictionary<Type, IDictionary<string, PropertyInfo>>();
+        private static readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 
         private const string MEDIA_TYPE = "application/json";
+        
 
-        private static IDictionary<string, PropertyInfo> GetTypeProperies<T>()
+    private static IDictionary<string, PropertyInfo> GetTypeProperies<T>()
         {
             var type = typeof(T);
-            if(dictionaryType.ContainsKey(type))
+            if(_dictionaryType.ContainsKey(type))
             {
-                return dictionaryType[type];
+                return _dictionaryType[type];
             }
 
             var properties = type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
             var dic = properties.ToDictionary(k => k.Name, v => v);
-            dictionaryType.Add(type, dic);
+            _dictionaryType.Add(type, dic);
             return dic;
         }
 
@@ -49,13 +51,12 @@ namespace Deviot.Common
 
         public static T Deserializer<T>(string json)
         {
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            return JsonSerializer.Deserialize<T>(json, options);
+            return JsonSerializer.Deserialize<T>(json, _jsonSerializerOptions);
         }
 
         public static string Serializer<T>(T value)
         {
-            return JsonSerializer.Serialize<T>(value);
+            return JsonSerializer.Serialize<T>(value, _jsonSerializerOptions);
         }
 
         public static bool ValidateEmail(string email)
