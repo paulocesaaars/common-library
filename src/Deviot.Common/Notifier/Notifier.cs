@@ -28,6 +28,12 @@ namespace Deviot.Common
             AddNotification(notify);
         }
 
+        public void Notify(string id, HttpStatusCode httpStatusCode, string message)
+        {
+            var notify = new Notify(id, httpStatusCode, message);
+            AddNotification(notify);
+        }
+
         public void NotifyCreated(string id, string message)
         {
             var notify = new Notify(id, HttpStatusCode.Created, message);
