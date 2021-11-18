@@ -15,7 +15,6 @@ namespace Deviot.Common
 
         public Notify(HttpStatusCode type, string message)
         {
-            Id = Guid.NewGuid().ToString();
             Type = type;
             Message = message;
         }
