@@ -11,6 +11,8 @@ namespace Deviot.Common
 
         void Notify(HttpStatusCode httpStatusCode, string message);
 
+        void Notify(string id, HttpStatusCode httpStatusCode, string message);
+
         void Clear();
     }
 }
