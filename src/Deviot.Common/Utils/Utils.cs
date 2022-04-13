@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -53,9 +54,40 @@ namespace Deviot.Common
             return JsonSerializer.Deserialize<T>(json, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
         }
 
-        public static string Serializer<T>(T value)
+        public static string PrettyJson(string unPrettyJson)
         {
-            return JsonSerializer.Serialize<T>(value, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
+            try
+            {
+                var options = new JsonSerializerOptions()
+                {
+                    WriteIndented = true
+                };
+
+                options.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+                var jsonElement = JsonSerializer.Deserialize<JsonElement>(unPrettyJson);
+
+                return JsonSerializer.Serialize(jsonElement, options);
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+        }
+
+        public static string Serializer<T>(T value, bool unsafeRelaxedJsonEscaping = false)
+        {
+            if (value is null)
+                return String.Empty;
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            };
+
+            if(unsafeRelaxedJsonEscaping)
+                options.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+
+            return JsonSerializer.Serialize<T>(value, options);
         }
 
         public static bool ValidateEmail(string email)
