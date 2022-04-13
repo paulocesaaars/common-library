@@ -12,8 +12,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/paulocesaaars/common-library</PackageProjectUrl>
     <Version>1.0.3.66</Version>
-    <AssemblyVersion>1.0.3.66</AssemblyVersion>
-    <FileVersion>1.0.3.66</FileVersion>
+    <AssemblyVersion>1.0.3.67</AssemblyVersion>
+    <FileVersion>1.0.3.67</FileVersion>
   </PropertyGroup>
 
 </Project>
