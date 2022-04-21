@@ -11,9 +11,13 @@
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/paulocesaaars/common-library</PackageProjectUrl>
-    <Version>1.0.3.67</Version>
-    <AssemblyVersion>1.0.3.67</AssemblyVersion>
-    <FileVersion>1.0.3.67</FileVersion>
+    <Version>1.0.3.68</Version>
+    <AssemblyVersion>1.0.3.68</AssemblyVersion>
+    <FileVersion>1.0.3.68</FileVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Management" Version="6.0.0" />
+  </ItemGroup>
 
 </Project>
