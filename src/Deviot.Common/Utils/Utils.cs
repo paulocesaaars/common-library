@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Management;
 using System.Net.Http;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -16,9 +17,12 @@ namespace Deviot.Common
         private static readonly IDictionary<Type, IDictionary<string, PropertyInfo>> _dictionaryType = new Dictionary<Type, IDictionary<string, PropertyInfo>>();
 
         private const string MEDIA_TYPE = "application/json";
-        
+        private const string SELECT_PROCESSOR_ID = "Select ProcessorID From Win32_processor";
+        private const string PROCESSOR_ID = "ProcessorID";
+        private const string SELECT_HD = "SELECT * FROM Win32_PhysicalMedia";
+        private const string SERIAL_NUMBER = "SerialNumber";
 
-    private static IDictionary<string, PropertyInfo> GetTypeProperies<T>()
+        private static IDictionary<string, PropertyInfo> GetTypeProperies<T>()
         {
             var type = typeof(T);
             if(_dictionaryType.ContainsKey(type))
@@ -31,6 +35,76 @@ namespace Deviot.Common
             var dic = properties.ToDictionary(k => k.Name, v => v);
             _dictionaryType.Add(type, dic);
             return dic;
+        }
+
+        public static string GetProcessorID()
+        {
+            var result = string.Empty;
+            try
+            {
+                var mbs = new ManagementObjectSearcher(SELECT_PROCESSOR_ID);
+                var mbsList = mbs.Get();
+
+                foreach (var mo in mbsList)
+                    result = mo[PROCESSOR_ID].ToString();
+            }
+            catch (Exception)
+            {
+                result = string.Empty;
+            }
+
+            return result;
+        }
+
+        public static string GetHDID()
+        {
+            var result = string.Empty;
+            try
+            {
+                var mbs = new ManagementObjectSearcher(SELECT_HD);
+                var mbsList = mbs.Get();
+
+                foreach (var mo in mbsList)
+                    result = mo[SERIAL_NUMBER].ToString();
+            }
+            catch (Exception)
+            {
+                result = string.Empty;
+            }
+
+            return result;
+        }
+
+        public static string GetHostName()
+        {
+            try
+            {
+                return Environment.MachineName;
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+        }
+
+        public static string GetDeviceIdentifier()
+        {
+            try
+            {
+                var result = GetProcessorID();
+                if (!string.IsNullOrEmpty(result))
+                    return result;
+
+                result = GetHDID();
+                if (!string.IsNullOrEmpty(result))
+                    return result;
+
+                return GetHostName();
+            }
+            catch(Exception)
+            {
+                return string.Empty;
+            }
         }
 
         public static void SetProperty<T>(this T target, string name, object value)
