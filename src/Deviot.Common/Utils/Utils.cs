@@ -204,6 +204,14 @@ namespace Deviot.Common
             return new Regex("^[a-zA-Z0-9_]*$").IsMatch(value);
         }
 
+        public static bool ValidateParameter(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return false;
+
+            return new Regex("^[a-zA-Z0-9,]*$").IsMatch(value);
+        }
+
         public static Exception ConvertException(IEnumerable<string> messages)
         {
             Exception exception = null;
