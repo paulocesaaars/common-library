@@ -21,5 +21,8 @@ jobs:
     - name: Publish Deviot.Common
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
+          BUILD_CONFIGURATION: Release
+          BUILD_PLATFORM: x64 
+          VERSION_FILE_PATH: src/Deviot.Common/Deviot.Common.csproj
           PROJECT_FILE_PATH: src/Deviot.Common/Deviot.Common.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
