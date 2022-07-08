@@ -19,7 +19,8 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore
     - name: Publish Deviot.Common
-      uses: brandedoutcast/publish-nuget@v2.5.2
+      id: publish_nuget
+      uses: brandedoutcast/publish-nuget@v2
       with:
           BUILD_CONFIGURATION: Release
           BUILD_PLATFORM: x64 
