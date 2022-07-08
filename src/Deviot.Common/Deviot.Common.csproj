@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Description>Pacote base para todos os projetos desenvolvidos pela empresa Deviot</Description>
     <RepositoryUrl>https://github.com/paulocesaaars/common-library</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
