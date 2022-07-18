@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
 namespace Deviot.Common
@@ -155,6 +156,7 @@ namespace Deviot.Common
 
             var options = new JsonSerializerOptions
             {
+                ReferenceHandler = ReferenceHandler.Preserve,
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
 
