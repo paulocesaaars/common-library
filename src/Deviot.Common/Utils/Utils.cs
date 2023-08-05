@@ -158,7 +158,6 @@ namespace Deviot.Common
             {
                 ReferenceHandler = ReferenceHandler.Preserve,
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
             };
 
             if(unsafeRelaxedJsonEscaping)
