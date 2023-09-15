@@ -15,6 +15,7 @@ namespace Deviot.Common
 {
     public static class Utils
     {
+
         private static readonly IDictionary<Type, IDictionary<string, PropertyInfo>> _dictionaryType = new Dictionary<Type, IDictionary<string, PropertyInfo>>();
 
         private const string MEDIA_TYPE = "application/json";
@@ -36,6 +37,75 @@ namespace Deviot.Common
             var dic = properties.ToDictionary(k => k.Name, v => v);
             _dictionaryType.Add(type, dic);
             return dic;
+        }
+
+        private static IDictionary<string, string> GetDictionary()
+        {
+            var result = new Dictionary<string, string>();
+            result.Add("a", "P");
+            result.Add("b", "Q");
+            result.Add("c", "R");
+            result.Add("d", "S");
+            result.Add("e", "T");
+            result.Add("f", "0");
+            result.Add("g", "1");
+            result.Add("h", "2");
+            result.Add("i", "3");
+            result.Add("j", "4");
+            result.Add("k", "5");
+            result.Add("l", "a");
+            result.Add("m", "b");
+            result.Add("n", "c");
+            result.Add("o", "d");
+            result.Add("p", "e");
+            result.Add("q", "f");
+            result.Add("r", "g");
+            result.Add("s", "h");
+            result.Add("t", "i");
+            result.Add("u", "j");
+            result.Add("v", "U");
+            result.Add("w", "V");
+            result.Add("x", "W");
+            result.Add("y", "X");
+            result.Add("z", "Y");
+            result.Add("A", "Z");
+            result.Add("B", "F");
+            result.Add("C", "G");
+            result.Add("D", "H");
+            result.Add("E", "I");
+            result.Add("F", "J");
+            result.Add("G", "K");
+            result.Add("H", "6");
+            result.Add("I", "7");
+            result.Add("J", "8");
+            result.Add("K", "9");
+            result.Add("L", "k");
+            result.Add("M", "l");
+            result.Add("N", "m");
+            result.Add("O", "n");
+            result.Add("P", "L");
+            result.Add("Q", "M");
+            result.Add("R", "N");
+            result.Add("S", "O");
+            result.Add("T", "o");
+            result.Add("U", "p");
+            result.Add("V", "q");
+            result.Add("W", "r");
+            result.Add("X", "s");
+            result.Add("Y", "t");
+            result.Add("Z", "u");
+            result.Add("0", "v");
+            result.Add("1", "w");
+            result.Add("2", "x");
+            result.Add("3", "y");
+            result.Add("4", "z");
+            result.Add("5", "A");
+            result.Add("6", "B");
+            result.Add("7", "C");
+            result.Add("8", "D");
+            result.Add("9", "E");
+
+            return result;
         }
 
         public static string GetProcessorID()
@@ -238,9 +308,9 @@ namespace Deviot.Common
             return (long)Math.Round((date.ToUniversalTime() - new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero)).TotalSeconds);
         }
 
-        public static string Encript(string password)
+        public static string Encript(string value)
         {
-            var bytes = Encoding.UTF8.GetBytes(password);
+            var bytes = Encoding.UTF8.GetBytes(value);
 
             using (SHA512 hash = SHA512.Create())
             {
@@ -255,6 +325,75 @@ namespace Deviot.Common
 
                 return hashedInputStringBuilder.ToString();
             }
+        }
+
+        public static string Encript(string salt, string encript)
+        {
+            if (salt.Length <= 3)
+                throw new Exception("O valor de salto precisa ser maior que 3");
+
+            if (encript.Length <= 3)
+                throw new Exception("O valor a ser criptografado precisar ser maior que 3");
+
+            var dictionary = GetDictionary();
+            var value = new StringBuilder();
+            var saltValue = encript.Length / 2;
+            for (var encriptIndex = 0; encriptIndex < encript.Length; encriptIndex++)
+            {
+                if (saltValue > encriptIndex)
+                {
+                    for (var saltIndex = 0; saltIndex < salt.Length; saltIndex++)
+                    {
+                        var saltLetterEncript = dictionary.Any(x => x.Key == salt[saltIndex].ToString())
+                        ? dictionary.First(x => x.Key == salt[saltIndex].ToString()).Value
+                        : salt[saltIndex].ToString();
+
+                        value.Append(saltLetterEncript);
+                    }
+                }
+
+                var valueLetterEncript = dictionary.Any(x => x.Key == encript[encriptIndex].ToString())
+                        ? dictionary.First(x => x.Key == encript[encriptIndex].ToString()).Value
+                        : encript[encriptIndex].ToString();
+                value.Append(valueLetterEncript);
+            }
+
+            return value.ToString();
+        }
+
+        public static string Decript(string salt, string decript)
+        {
+            if (salt.Length <= 3)
+                throw new Exception("O valor de salto precisa ser maior que 3");
+
+            if (decript.Length <= 6)
+                throw new Exception("O valor a ser descriptografado precisar ser maior que 6");
+
+            var dictionary = GetDictionary();
+            var value = new StringBuilder();
+            var saltValue = new StringBuilder();
+            for (var saltIndex = 0; saltIndex < salt.Length; saltIndex++)
+            {
+                var saltLetterEncript = dictionary.Any(x => x.Key == salt[saltIndex].ToString())
+                ? dictionary.First(x => x.Key == salt[saltIndex].ToString()).Value
+                : salt[saltIndex].ToString();
+
+                saltValue.Append(saltLetterEncript);
+            }
+
+            decript = decript.Replace(saltValue.ToString(), string.Empty);
+            if (decript.Length == value.Length)
+                throw new Exception("O valor de salto é inválido");
+
+            for (var dencriptIndex = 0; dencriptIndex < decript.Length; dencriptIndex++)
+            {
+                var valueLetterEncript = dictionary.Any(x => x.Value == decript[dencriptIndex].ToString())
+                        ? dictionary.First(x => x.Value == decript[dencriptIndex].ToString()).Key
+                        : decript[dencriptIndex].ToString();
+                value.Append(valueLetterEncript);
+            }
+
+            return value.ToString();
         }
 
         public static string GenerateRandomString(int length)
