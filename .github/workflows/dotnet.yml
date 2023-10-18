@@ -21,5 +21,3 @@ jobs:
       run: dotnet pack src/Deviot.Common/Deviot.Common.csproj --no-build --configuration Release --include-symbols -p:SymbolPackageFormat=snupkg -o .
     - name: Publish package to NuGet
       run: dotnet nuget push *.nupkg --api-key ${{secrets.NUGET_API_KEY}} --source "https://api.nuget.org/v3/index.json" --skip-duplicate
-    - name: publish package to GitHub
-      run: dotnet nuget push *.nupkg --api-key ${{secrets.PUBLISH_TO_GITHUB_TOKEN}} --source "https://nuget.pkg.github.com/VAllens/index.json" --skip-duplicate
