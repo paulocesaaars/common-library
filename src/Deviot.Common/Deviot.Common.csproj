@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Description>Pacote base para todos os projetos desenvolvidos pela empresa Deviot</Description>
     <RepositoryUrl>https://github.com/paulocesaaars/common-library</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
@@ -11,15 +11,10 @@
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/paulocesaaars/common-library</PackageProjectUrl>
-    <Version>1.0.4.2</Version>
-    <AssemblyVersion>1.0.4.2</AssemblyVersion>
-    <FileVersion>1.0.4.2</FileVersion>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <Version>1.0.4.3</Version>
+    <AssemblyVersion>1.0.4.3</AssemblyVersion>
+    <FileVersion>1.0.4.3</FileVersion>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Include="favicon.ico" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Management" Version="6.0.0" />
