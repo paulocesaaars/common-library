@@ -11,9 +11,9 @@
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/paulocesaaars/common-library</PackageProjectUrl>
-    <Version>1.0.4.4</Version>
-    <AssemblyVersion>1.0.4.4</AssemblyVersion>
-    <FileVersion>1.0.4.4</FileVersion>
+    <Version>1.0.4.41</Version>
+    <AssemblyVersion>1.0.4.41</AssemblyVersion>
+    <FileVersion>1.0.4.41</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
